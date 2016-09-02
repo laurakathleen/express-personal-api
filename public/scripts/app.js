@@ -1,9 +1,10 @@
 console.log("Sanity Check: JS is working!");
-
-$(document).ready(function(){
 	//array to hold all place data from API
 	var allPlaces = [];
+
+$(document).ready(function(){
 	console.log("ajax is all good");
+	
 	$.ajax({
 		method: "GET",
 		url: '/api/profile',

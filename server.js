@@ -68,18 +68,20 @@ app.get('/api', function api_index(req, res) {
 //   res.json({
 
 //   })
-//define a root route: localhost:3000/
-app.get('/', function(req, res){
-  res.sendFile('views/index.html', { root: __dirname});
+app.get('api/profile', function(req, res){
+  db.Profile.find().populate('pets')
+  .exec(function(err, profile){
+    if(err) { return console.log("index error: " + err); }
+    res.json(books);
+    });
 });
 
-
-app.get('/api/pets', function(req, res){
-  db.Profile.find().populate('pets')
-  .exec(function(err, pets){
+app.get('/api/places', function(req, res){
+  db.Place.find()
+  .exec(function(err, places){
     if(err) { return console.log("index error: " + err); }
-    res.json(pets);
-  });
+      res.json(data);
+    });
 });
 /**********
  * SERVER *
