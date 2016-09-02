@@ -18,8 +18,10 @@ app.use(function(req, res, next) {
 /************
  * DATABASE *
  ************/
-
-// var db = require('./models');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/express-personal-api');
+var db = require('./models');
+//var Profile = require('./models/profile.js');
 
 /**********
  * ROUTES *
@@ -55,7 +57,12 @@ app.get('/api', function api_index(req, res) {
       {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
     ]
   })
-});
+}); 
+
+// app.get('/api/profile', function api_index(req, res) {
+//   res.json({
+
+//   })
 
 /**********
  * SERVER *
