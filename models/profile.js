@@ -11,6 +11,7 @@ var ProfileSchema = new Schema({
 		type: String,
 		name: String,
 		breed: String,
+		age: Number,
 		image: String
 	}
 });

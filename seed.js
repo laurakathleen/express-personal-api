@@ -13,7 +13,8 @@ var Laura = new Profile({
 		type: "dog",
 		name: "Meechum",
 		breed: "Australian Shepherd",
-		image: String
+		age: 1.5,
+		image: "public/images/Meechum.JPG"
 	}
 });
 

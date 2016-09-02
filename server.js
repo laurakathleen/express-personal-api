@@ -47,23 +47,40 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documented_my_endpoints: true, // CHANGE ME ;)
+    message: "Welcome to my personal api! I'll go ahead and tell you a little bit about myself!",
+    documentationUrl: "https://github.com/laurakathleen/express-personal-api", // CHANGE ME
+    baseUrl: "https://safe-plains-86136.herokuapp.com/", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "More about me"}, // CHANGE ME
+      {method: "POST", path: "/api/past-places", description: "Check out the places I've visited"} // CHANGE ME
     ]
   })
 }); 
+
+
+/**********
+ * SERVER *
+ **********/
 
 // app.get('/api/profile', function api_index(req, res) {
 //   res.json({
 
 //   })
+//define a root route: localhost:3000/
+app.get('/', function(req, res){
+  res.sendFile('views/index.html', { root: __dirname});
+});
 
+
+app.get('/api/pets', function(req, res){
+  db.Profile.find().populate('pets')
+  .exec(function(err, pets){
+    if(err) { return console.log("index error: " + err); }
+    res.json(pets);
+  });
+});
 /**********
  * SERVER *
  **********/
