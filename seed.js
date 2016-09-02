@@ -3,41 +3,17 @@
 
 var db = require('./models');
 
-var new_profile = {
-	name: "Laura Russell",
-	githubLink: "https://github.com/laurakathleen",
-	githubProfileImage: String,
-	personalSiteLink: "https://laurakathleen.github.io/#home-tab",
-	currentCity: "Burlingame",
-	pets: [{
-		type: "dog",
-		name: "Meechum",
-		breed: "Australian Shepherd",
-		age: 1.5,
-		image: "public/images/Meechum.JPG"
-	}]
-};
-
-var new_places = [
+var new_place = [
   {
     city: "Rome",
 	country: "Italy",
 	image: "String",
 	favoriteSite: "Pantheon",
-	planningToReturn: false,
-	favoriteFood: "pizza",
-	cityPopulation: 1000000
-  }
+	haveVisited: true,
+	futureDestination: false,
+	bestFood: "pizza"
+	}
  ];
-
-db.Profile.remove({}, function (err, profiles) {
-  console.log('removed all profiles');
-  db.Profile.create(new_profile, function (err, profile){
-    if (err) {
-    	console.log("Error", err);
-    } else {
-    	console.log("Created new profile", profile._id);
-    }
 
     db.Place.remove({}, function (err, profiles) {
   	console.log('removed all places');
@@ -45,12 +21,11 @@ db.Profile.remove({}, function (err, profiles) {
     if (err) {
     	console.log("Error", err);
     } else {
-    	console.log("Created new place", place._id);
+    	console.log("Created new place", place);
     }
 	});
   });
-});
-});
+
 
 // var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
 

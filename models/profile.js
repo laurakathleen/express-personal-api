@@ -1,21 +1,19 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-var PetSchema = new Schema({
-	type: String,
-	name: String,
-	breed: String,
-	age: Number,
-	image: String
-})
-
 var ProfileSchema = new Schema({
    name: String,
    githubLink: String,
    githubProfileImage: String,
    personalSiteLink: String,
    currentCity: String,
-   pets: [PetSchema]
+   pets: {
+   		type: String,
+		name: String,
+		breed: String,
+		age: Number,
+		image: String
+   }
 });
 
 var Profile = mongoose.model('Profile', ProfileSchema);

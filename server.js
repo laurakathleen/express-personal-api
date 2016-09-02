@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
  ************/
 var mongoose = require('mongoose');
 var db = require('./models');
-//var Profile = require('./models/profile.js');
+var Profile = require('./models/profile.js');
 
 /**********
  * ROUTES *
@@ -37,6 +37,25 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+var new_profile = new Profile({
+  name: "Laura Russell",
+  githubLink: "https://github.com/laurakathleen",
+  githubProfileImage: String,
+  personalSiteLink: "https://laurakathleen.github.io/#home-tab",
+  currentCity: "Burlingame",
+  pets: {
+    type: "dog",
+    name: "Meechum",
+    breed: "Australian Shepherd",
+    age: 1.5,
+    image: "public/images/Meechum.JPG"
+  }
+});
+
+ // new_profile.save(function(err, newProfile){
+ //    if(err) {return console.log(err);}
+ //    console.log("saved new profile: ", new_profile);
+ //  });
 
 /*
  * JSON API Endpoints
@@ -66,21 +85,33 @@ app.get('/api', function api_index(req, res) {
 //   res.json({
 
 //   })
-app.get('api/profile', function(req, res){
-  db.Profile.find().populate('pets')
-  .exec(function(err, profile){
-    if(err) { return console.log("index error: " + err); }
-    res.json(books);
-    });
+
+//get profile:
+app.get('/api/profile', function(req, res){
+    console.log(new_profile);
+    res.json(new_profile);
+});
+//   db.Profile.find().populate('pets')
+//   .exec(function(err, profile){
+//     if(err) { return console.log("index error: " + err); }
+//     res.json(books);
+//     });
+// });
+
+//get all places:
+app.get('/api/places', function(req, res){
+  db.Place.find({}, function(err, place){
+    console.log(place);
+    res.json(place);
+  })
 });
 
-app.get('/api/places', function(req, res){
-  db.Place.find()
-  .exec(function(err, places){
-    if(err) { return console.log("index error: " + err); }
-      res.json(data);
-    });
-});
+//   db.Place.find()
+//   .exec(function(err, places){
+//     if(err) { return console.log("index error: " + err); }
+//       res.json(data);
+//     });
+// });
 /**********
  * SERVER *
  **********/
