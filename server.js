@@ -91,12 +91,19 @@ app.get('/api/profile', function(req, res){
     console.log(new_profile);
     res.json(new_profile);
 });
-//   db.Profile.find().populate('pets')
-//   .exec(function(err, profile){
-//     if(err) { return console.log("index error: " + err); }
-//     res.json(books);
-//     });
+// app.get('/api/profile', function(req, res){
+//   Profile.find({ })
+//     .populate('pets')
+//     .exec(function(err, profile){
+//       if(err) {
+//         return console.log(err);
+//       }
+//       if (profile.pets.length > 0){
+//         console.log(pets.name);
+//     }   
+//   });
 // });
+
 
 //get all places:
 app.get('/api/places', function(req, res){
@@ -106,12 +113,6 @@ app.get('/api/places', function(req, res){
   })
 });
 
-//   db.Place.find()
-//   .exec(function(err, places){
-//     if(err) { return console.log("index error: " + err); }
-//       res.json(data);
-//     });
-// });
 /**********
  * SERVER *
  **********/

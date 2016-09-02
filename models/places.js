@@ -8,7 +8,6 @@ var PlaceSchema = new Schema({
 	favoriteSite: String,
 	haveVisited: Boolean,
 	futureDestination: Boolean,
-	bestFood: String
  });
 
 var Place = mongoose.model('Place', PlaceSchema);

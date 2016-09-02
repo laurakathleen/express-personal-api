@@ -11,7 +11,6 @@ var new_place = [
 	favoriteSite: "Pantheon",
 	haveVisited: true,
 	futureDestination: false,
-	bestFood: "pizza"
 	}
  ];
 

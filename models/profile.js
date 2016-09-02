@@ -8,12 +8,12 @@ var ProfileSchema = new Schema({
    personalSiteLink: String,
    currentCity: String,
    pets: {
-   		type: String,
-		name: String,
-		breed: String,
-		age: Number,
-		image: String
-   }
+   	type: String,
+    name: String,
+    breed: String,
+    age: Number,
+    image: String
+	}
 });
 
 var Profile = mongoose.model('Profile', ProfileSchema);
