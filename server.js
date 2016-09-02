@@ -19,7 +19,6 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/express-personal-api');
 var db = require('./models');
 //var Profile = require('./models/profile.js');
 
@@ -34,7 +33,6 @@ app.use(express.static('public'));
 /*
  * HTML Endpoints
  */
-
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
