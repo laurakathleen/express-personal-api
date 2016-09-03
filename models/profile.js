@@ -7,13 +7,7 @@ var ProfileSchema = new Schema({
    githubProfileImage: String,
    personalSiteLink: String,
    currentCity: String,
-   pets: {
-   	type: String,
-    name: String,
-    breed: String,
-    age: Number,
-    image: String
-	}
+   pets: Array
 });
 
 var Profile = mongoose.model('Profile', ProfileSchema);

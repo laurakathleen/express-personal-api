@@ -4,13 +4,21 @@
 var db = require('./models');
 
 var new_place = [
-  {
+	{
     city: "Rome",
 	country: "Italy",
 	image: "String",
 	favoriteSite: "Pantheon",
 	haveVisited: true,
 	futureDestination: false,
+	},
+	{
+    city: "Dublin",
+	country: "Ireland",
+	image: "String",
+	favoriteSite: "Guinness Factory",
+	haveVisited: true,
+	futureDestination: true,
 	}
  ];
 

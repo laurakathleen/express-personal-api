@@ -43,13 +43,13 @@ var new_profile = new Profile({
   githubProfileImage: String,
   personalSiteLink: "https://laurakathleen.github.io/#home-tab",
   currentCity: "Burlingame",
-  pets: {
+  pets: [{
     type: "dog",
     name: "Meechum",
     breed: "Australian Shepherd",
     age: 1.5,
     image: "public/images/Meechum.JPG"
-  }
+  }]
 });
 
  // new_profile.save(function(err, newProfile){
@@ -111,6 +111,34 @@ app.get('/api/places', function(req, res){
     console.log(place);
     res.json(place);
   })
+});
+
+//get one place by id:
+app.get('/api/places/:id', function(req, res){
+  var placeId = req.params.id;
+  db.Place.findOne({_id: placeId }, function(err, data){
+    res.json(data);
+  });
+});
+
+//create new place using form and post it:
+app.post('/api/places', function(req, res){
+  var newPlace = new db.Place({
+    city: req.body.city,
+    country: req.body.country,
+    image: req.body.image,
+    favoriteSite: req.body.favoriteSite,
+    futureDestination: req.body.futureDestination
+  });
+  newPlace.save(function(err, place){
+      if (err) {
+        return console.log("save error: " + err);
+      }
+      console.log("saved ", place.city);
+      // send back the book!
+      place.push(newPlace);
+      res.json(place);
+    });
 });
 
 /**********
