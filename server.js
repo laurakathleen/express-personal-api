@@ -105,7 +105,7 @@ app.get('/api/profile', function(req, res){
 // });
 
 
-//get all places:
+//get all places (WORKING):
 app.get('/api/places', function(req, res){
   db.Place.find({}, function(err, place){
     console.log(place);
@@ -113,7 +113,7 @@ app.get('/api/places', function(req, res){
   })
 });
 
-//get one place by id:
+//get one place by id (WORKING):
 app.get('/api/places/:id', function(req, res){
   var placeId = req.params.id;
   db.Place.findOne({_id: placeId }, function(err, data){
