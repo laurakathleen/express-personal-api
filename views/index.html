@@ -40,16 +40,21 @@
           <!-- handlebars template -->
           <script id="places-template" type="text/x-handlebars-template">
             {{#each places}}
+            <div class="group-place">
             <hr>
-            <o>
+            <p>
               <b>{{city}}, {{country}}</b>
             <br>
-            <b>Favorite Site:</b>
+            Favorite Site:
             {{favoriteSite}}
             <br>
-            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data id={{_id}}>Delete</button>
+            <button type="button" class="btn btn-primary editBtn" data-id={{_id}}>Edit</button>
+            <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
+            <!-- <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data id={{_id}}>Delete</button> -->
             </p>
-            <button type="submit" class="btn btn-default">Add new place</button>
+            </div>
+            {{/each}}
+          </script>
         </div>
       </div>
     </div>

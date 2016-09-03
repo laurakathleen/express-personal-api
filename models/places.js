@@ -6,8 +6,8 @@ var PlaceSchema = new Schema({
 	country: String,
 	image: String,
 	favoriteSite: String,
-	haveVisited: Boolean,
-	futureDestination: Boolean,
+	// haveVisited: Boolean,
+	// futureDestination: Boolean,
  });
 
 var Place = mongoose.model('Place', PlaceSchema);

@@ -9,16 +9,16 @@ var new_place = [
 	country: "Italy",
 	image: "String",
 	favoriteSite: "Pantheon",
-	haveVisited: true,
-	futureDestination: false,
+	// haveVisited: true,
+	// futureDestination: false,
 	},
 	{
     city: "Dublin",
 	country: "Ireland",
 	image: "String",
 	favoriteSite: "Guinness Factory",
-	haveVisited: true,
-	futureDestination: true,
+	// haveVisited: true,
+	// futureDestination: true,
 	}
  ];
 
@@ -30,6 +30,11 @@ var new_place = [
     } else {
     	console.log("Created new place", place);
     }
+	});
+	place.save(function(err, savedPlace){
+		if(err){
+			return console.log('error with saving places');
+		}
 	});
   });
 

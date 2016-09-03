@@ -86,31 +86,20 @@ app.get('/api', function api_index(req, res) {
 
 //   })
 
-//get profile:
+//get profile (WORKING):
 app.get('/api/profile', function(req, res){
     console.log(new_profile);
     res.json(new_profile);
 });
-// app.get('/api/profile', function(req, res){
-//   Profile.find({ })
-//     .populate('pets')
-//     .exec(function(err, profile){
-//       if(err) {
-//         return console.log(err);
-//       }
-//       if (profile.pets.length > 0){
-//         console.log(pets.name);
-//     }   
-//   });
-// });
 
 
 //get all places (WORKING):
 app.get('/api/places', function(req, res){
   db.Place.find({}, function(err, place){
+    if (err) { return console.log("index error: " + err);}
     console.log(place);
     res.json(place);
-  })
+  });
 });
 
 //get one place by id (WORKING):
@@ -121,14 +110,14 @@ app.get('/api/places/:id', function(req, res){
   });
 });
 
-//create new place using form and post it:
+//create new place using form and post it to /api/places (WORKING):
 app.post('/api/places', function(req, res){
   var newPlace = new db.Place({
     city: req.body.city,
     country: req.body.country,
     image: req.body.image,
-    favoriteSite: req.body.favoriteSite,
-    futureDestination: req.body.futureDestination
+    favoriteSite: req.body.favoriteSite/*,*/
+    // futureDestination: req.body.futureDestination
   });
   newPlace.save(function(err, place){
       if (err) {
@@ -139,6 +128,32 @@ app.post('/api/places', function(req, res){
       // place.push(newPlace);
       res.json(place);
     });
+});
+
+//upon clicking 'edit', update that place:
+app.put('/api/places/:id', function update(req, res){
+  var id = parseInt(req.params.id);
+  var city = req.body.city;
+  var country = req.body.country;
+  var image = req.body.image;
+  var favoriteSite = req.body.favoriteSite/*;*/
+  // var futureDestination = req.body.futureDestination;
+  var updatePlace = {_id: id, city: city, country: country, image: image, favoriteSite: favoriteSite, futureDestination: futureDestination};
+  for (var i=0; i < places.length; i++){
+    if (places[i]._id === req.params.id){
+      places.splice(i, 1, i, 1, i, 1, i, 1, i, 1, i, 1);
+    }
+  }
+  res.json(updatePlace);
+});
+
+//delete one place (WORKING):
+app.delete('/api/places/:id', function(req, res){
+  console.log('place deleted');
+  var placeId = req.params.id;
+  db.Place.findOneAndRemove({ _id: placeId}, function(err, deletedPlace){
+    res.json(deletedPlace);
+  });
 });
 
 /**********
