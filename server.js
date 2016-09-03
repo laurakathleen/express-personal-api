@@ -136,7 +136,7 @@ app.post('/api/places', function(req, res){
       }
       console.log("saved ", place.city);
       // send back the book!
-      place.push(newPlace);
+      // place.push(newPlace);
       res.json(place);
     });
 });

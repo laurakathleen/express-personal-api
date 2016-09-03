@@ -1,10 +1,16 @@
 console.log("Sanity Check: JS is working!");
 	var template;
+	var $placesList;
 	//array to hold all place data from API
 	var allPlaces = [];
 
 $(document).ready(function(){
 	console.log("ajax is all good");
+	$placesList = $('#placeTarget');
+
+	//compile handlebars:
+	var source = $('#places-template').html();
+	template = Handlebars.compile(source);
 	
 	$.ajax({
 		method: "GET",
@@ -25,6 +31,17 @@ $(document).ready(function(){
 		});
 	});
 
+	function render(){
+		//empty all existing posts from view
+		$placesList.empty();
+
+		//pass allPlaces into the template function
+		var placesHtml = template({ places: allPlaces});
+
+		//append html to the view
+		$placesList.append(placesHtml);
+	}
+
 	function onSuccess(json){
 		console.log(json);
 		allPlaces = json;
@@ -37,7 +54,6 @@ $(document).ready(function(){
 
 	function newPlaceSuccess(json){
 		$('#places-form input').val('');
-		allPlaces.push(json);
 		render();
 	}
 

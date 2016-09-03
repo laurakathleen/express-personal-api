@@ -36,6 +36,20 @@
             <input type="radio" name="not-future-destination" placeholder="No">No<br>
             <input type="submit" value="Add new place">
           </form>
+          <div id="placeTarget">
+          <!-- handlebars template -->
+          <script id="places-template" type="text/x-handlebars-template">
+            {{#each places}}
+            <hr>
+            <o>
+              <b>{{city}}, {{country}}</b>
+            <br>
+            <b>Favorite Site:</b>
+            {{favoriteSite}}
+            <br>
+            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data id={{_id}}>Delete</button>
+            </p>
+            <button type="submit" class="btn btn-default">Add new place</button>
         </div>
       </div>
     </div>
