@@ -1,24 +1,43 @@
 console.log("Sanity Check: JS is working!");
 	var template;
+	var $profileSpot;
 	var $placesList;
 	var deleteIt = $('.deleteBtn');
-	//array to hold all place data from API
-	var allPlaces = [];
 
 $(document).ready(function(){
 	console.log("ajax is all good");
 	$placesList = $('#placeTarget');
+	$profileSpot = $('#profileTarget');
+
+	//compile handlebars:
+	var profileSource = $('#profile-template').html();
+	var profileTemplate = Handlebars.compile(profileSource);
+	var myProfile = [];
+
+	//get my profile:
+	$.ajax({
+		method: "GET",
+		url: '/api/profile',
+		// dataType: 'json',
+		success: onProfileSuccess,
+		error: onError
+	});
 
 	//compile handlebars:
 	var source = $('#places-template').html();
 	template = Handlebars.compile(source);
+	//array to hold all place data from API
+	var allPlaces = [];
 	
+	
+	//get all places:
 	$.ajax({
 		method: "GET",
 		url: '/api/places',
 		success: onSuccess,
 		error: onError
 	});
+
 
 	//add a new place:
 	$('#places-form').on('submit', function(e){
@@ -34,25 +53,29 @@ $(document).ready(function(){
 	});
 
 	//update place:
-	$placesList
-	.on('click', '.editBtn', function(e){
+	$placesList.on('submit', 'update-place', function(e){
 		e.preventDefault();
 		var placeId = $(this).closest('.place').attr('data-id');
 		var placeToUpdate = allPlaces.find(function(place){
 			return place._id == placeId;
-		});
+		 });
 		var updatedPlace = $(this).serialize();
 		$.ajax({
 			type: 'PUT',
 			url: '/api/places/' + placeId,
-			success: onUpdateSuccess,
-			error: onUpdateError
+			data: updatedPlace,
+			success: function onUpdateSuccess(json){
+				allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
+				render();
+			// error: onUpdateError
+			}
 		});
 	});
 
 	//delete a place:
 	$placesList.on('click', '.deleteBtn', function(e){
 		e.preventDefault();
+		console.log($(this))
 		console.log('clicked delete btn to get rid of ' + '/api/places/' +$(this).attr('data-id'));
 		$.ajax({
 			method: 'DELETE',
@@ -75,6 +98,20 @@ $(document).ready(function(){
 		$placesList.append(placesHtml);
 	}
 
+	function profileRender(){
+		$profileSpot.empty();
+		var profileHtml = profileTemplate({ profile: myProfile});
+		console.log(myProfile);
+		console.log(profileHtml);
+		$profileSpot.append(profileHtml);
+	}
+
+	function onProfileSuccess(json){
+		console.log(json);
+		myProfile = json;
+		profileRender();
+	}
+
 	function onSuccess(json){
 		console.log(json);
 		allPlaces = json;
@@ -95,10 +132,10 @@ $(document).ready(function(){
 		console.log('newplace error!');
 	}
 
-	function onUpdateSuccess(json){
-		allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
-		render();
-	}
+	// function onUpdateSuccess(json){
+	// 	allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
+	// 	render();
+	// }
 
 	function onUpdateError(){
 		console.log('error with updating place');
