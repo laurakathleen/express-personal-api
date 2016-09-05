@@ -90,7 +90,7 @@ app.get('/api', function api_index(req, res) {
 app.get('/api/profile', function(req, res){
   db.Profile.find({}, function(err, profile){
     if(err) { return console.log("index error: " + err);}
-    console.log(new_profile);
+    // console.log(new_profile);
     res.json(new_profile);
   });
 });
@@ -100,7 +100,7 @@ app.get('/api/profile', function(req, res){
 app.get('/api/places', function(req, res){
   db.Place.find({}, function(err, place){
     if (err) { return console.log("index error: " + err);}
-    console.log(place);
+    // console.log(place);
     res.json(place);
   });
 });
@@ -126,7 +126,7 @@ app.post('/api/places', function(req, res){
       if (err) {
         return console.log("save error: " + err);
       }
-      console.log("saved ", place.city);
+      // console.log("saved ", place.city);
       // send back the book!
       // place.push(newPlace);
       res.json(place);
@@ -137,39 +137,27 @@ app.post('/api/places', function(req, res){
 app.put('/api/places/:id', function (req, res){
   var placeId = parseInt(req.params.id);
   db.Place.findOne({ _id: placeId }, function (err, foundPlace){
-  foundPlace.city = req.body.city;
-  foundPlace.country = req.body.country;  
-  foundPlace.image = req.body.image;
-  foundPlace.favoriteSite = req.body.favoriteSite;
-  //updatePlace = {_id: id, city: city, country: country, image: image, favoriteSite: favoriteSite};
+  var city = req.body.city;
+  var country = req.body.country;  
+  var image = req.body.image;
+  var favoriteSite = req.body.favoriteSite;
+  updatePlace = {_id: placeId, city: city, country: country, image: image, favoriteSite: favoriteSite};
   res.json(foundPlace);
-  foundPlace.save(function(err, savedPlace){
+  for (var i=0; i<places.length; i++){
+    if (places[i]._id == req.params.id){
+      places.splice(i, 1, i, 1, i, 1, i, 1, i, 1);
+    }
+  }
+    res.json(updatePlace);
+  });
+  updatePlace.save(function(err, savedPlace){
        res.json(savedPlace);
-     });
-  // for (var i=0; i<Place.length; i++){
-  //     if (Place[i]._id === req.params.id){
-  //     Place.splice(i, 1, i, 1, i, 1, i, 1, i, 1);
-  //   }
-  // }
-}); 
+  }); 
 });
-
-//   db.Place.findOne({ _id: placeId }, function (err, foundPlace){
-//     foundPlace.city = req.body.city;
-//     foundPlace.country = req.body.country;
-//     foundPlace.image = req.body.image;
-//     foundPlace.favoriteSite = req.body.favoriteSite;
-//     var updatePlace = {_id: _id, city: foundPlace.city, country: foundPlace.country, image: foundPlace.image, favoriteSite: foundPlace.favoriteSite};
-    
-//     updatePlace.save(function(err, savedPlace){
-//       res.json(savedPlace);
-//     });
-//   });
-// });
 
 //delete one place (WORKING):
 app.delete('/api/places/:id', function(req, res){
-  console.log('place deleted');
+  // console.log('place deleted');
   var placeId = req.params.id;
   db.Place.findOneAndRemove({ _id: placeId}, function(err, deletedPlace){
     res.json(deletedPlace);

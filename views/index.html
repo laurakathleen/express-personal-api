@@ -53,25 +53,43 @@
             <input type="radio" name="not-future-destination" placeholder="No">No<br>
             <input type="submit" value="Add new place">
           </form>
-          <div id="placeTarget">
-          <!-- handlebars template -->
-          <script id="places-template" type="text/x-handlebars-template">
-            {{#each places}}
-            <li class="place-group-item place" data-id="{{_id}}">
-            <hr>
-            <p>
-              <b>{{city}}, {{country}}</b>
-            <br>
-            Favorite Site:
-            {{favoriteSite}}
-            <br>
 
-            <div class="pull-right">
-                  <!-- edit button to toggle update form -->
-                  <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
-                  <button type="button" class="btn btn-primary editBtn" data-id={{_id}}>Edit</button>                  
-                  </a>
-            </div>
+          <!--GOOGLE MAPS-->
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div id="map"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="info">
+
+                      <script id="earthquake-template" type="text/x-handlebars-template">
+                        {{#each features}}
+                        {{/each}}
+                      </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHLett8djBo62dDXj0EjCimF8Rd6E8cxg&callback=initMap"></script>
+
+          <div id="placeTarget">
+            <!-- handlebars template -->
+            <script id="places-template" type="text/x-handlebars-template">
+              {{#each places}}
+              <li class="place-group-item place" data-id="{{_id}}">
+              <hr>
+              <p>
+                <b>{{city}}, {{country}}</b>
+              <br>
+              Favorite Site:
+              {{favoriteSite}}
+              <br>
+
+                    <!-- edit button to toggle update form -->
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+                    <span><button type="button" class="btn btn-primary editBtn" data-id={{_id}}>Edit</button></span>                  
+                    </a>
 
             <!--Form to update the place-->
             <div class="collapse" id="update-{{_id}}">
@@ -80,16 +98,16 @@
                 <div class="form-group">
                 <input type="text" name="city" placeholder="City" value="{{city}}">
                 <input type="text" name="country" placeholder="Country" value="{{country}}">
-                <input type="file" label="Image">
+                <!-- <input type="file" label="Image">
                 <input type="text" name="favorite-site" placeholder="Favorite Site" value="{{favoriteSite}}">
                 <p>Already visited?</p>
                 <input type="radio" name="yes-visited" value="Yes">Yes<br>
                 <input type="radio" name="no-not-visited" value="No">No</br>
                 <p>Planning to go someday?</p>
                 <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
-                <input type="radio" name="not-future-destination" placeholder="No">No<br>
+                <input type="radio" name="not-future-destination" placeholder="No">No<br> -->
                 </div>
-                <input type="submit" value="Update place">
+                <input type="submit" name="update-place" value="Update place">
               </form>
             </div>
             

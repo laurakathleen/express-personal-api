@@ -4,6 +4,24 @@ console.log("Sanity Check: JS is working!");
 	var $placesList;
 	var deleteIt = $('.deleteBtn');
 
+	// define google map globals
+	var weekly_quakes_endpoint = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
+	var $quakesList;
+	var map;
+	var mapTemplate;
+	var coords = [];
+	var latcoord;
+	var loncoord;
+	var marker;
+
+	function initMap() {
+		var mapDiv = document.getElementById('map');
+	    map = new google.maps.Map(mapDiv, {
+	      center: {lat: 37.78, lng: -122.44},
+	      zoom: 8
+	    });
+	}
+
 $(document).ready(function(){
 	console.log("ajax is all good");
 	$placesList = $('#placeTarget');
@@ -21,6 +39,14 @@ $(document).ready(function(){
 		// dataType: 'json',
 		success: onProfileSuccess,
 		error: onError
+	});
+
+	//google map:
+	$.ajax({
+		method: "GET",
+		url: weekly_quakes_endpoint,
+		dataType: "json",
+		success: onMapSuccess
 	});
 
 	//compile handlebars:
@@ -42,7 +68,7 @@ $(document).ready(function(){
 	//add a new place:
 	$('#places-form').on('submit', function(e){
 		e.preventDefault();
-		console.log('new place serialized', $(this).serializeArray());
+		// console.log('new place serialized', $(this).serializeArray());
 		$.ajax({
 			method: 'POST',
 			url: '/api/places',
@@ -53,7 +79,7 @@ $(document).ready(function(){
 	});
 
 	//update place:
-	$placesList.on('submit', 'update-place', function(e){
+	$placesList.on('submit', '.update-place', function(e){
 		e.preventDefault();
 		var placeId = $(this).closest('.place').attr('data-id');
 		var placeToUpdate = allPlaces.find(function(place){
@@ -75,8 +101,8 @@ $(document).ready(function(){
 	//delete a place:
 	$placesList.on('click', '.deleteBtn', function(e){
 		e.preventDefault();
-		console.log($(this))
-		console.log('clicked delete btn to get rid of ' + '/api/places/' +$(this).attr('data-id'));
+		// console.log($(this))
+		// console.log('clicked delete btn to get rid of ' + '/api/places/' +$(this).attr('data-id'));
 		$.ajax({
 			method: 'DELETE',
 			url: '/api/places/'+$(this).attr('data-id'),
@@ -92,7 +118,7 @@ $(document).ready(function(){
 
 		//pass allPlaces into the template function
 		var placesHtml = template({ places: allPlaces});
-		console.log(placesHtml);
+		// console.log(placesHtml);
 
 		//append html to the view
 		$placesList.append(placesHtml);
@@ -101,19 +127,53 @@ $(document).ready(function(){
 	function profileRender(){
 		$profileSpot.empty();
 		var profileHtml = profileTemplate({ profile: myProfile});
-		console.log(myProfile);
-		console.log(profileHtml);
+		// console.log(myProfile);
+		// console.log(profileHtml);
 		$profileSpot.append(profileHtml);
 	}
 
 	function onProfileSuccess(json){
-		console.log(json);
+		// console.log(json);
 		myProfile = json;
 		profileRender();
 	}
 
+	//on map success:
+	function onMapSuccess(json){
+		var data = json.features;
+
+		for (var i = 0; i < data.length; i++) {
+			var loncoord = data[i].geometry.coordinates[0];
+			var latcoord = data[i].geometry.coordinates[1];
+
+			coords = {lat: latcoord, lng: loncoord};
+
+			marker = new google.maps.Marker({
+			position: coords,
+			map: map,
+			title: "Earthquake"
+			});
+
+			}
+	
+			console.log(coords);
+
+		var mapSource=$('#earthquake-template').html();
+		 
+
+		//compile:
+		var mapTemplate=Handlebars.compile(mapSource);
+		console.log(mapTemplate);
+
+		var earthquakeHtml = mapTemplate({features: data});
+		console.log(earthquakeHtml);
+		
+		$("#info").append(earthquakeHtml);
+	}
+
+
 	function onSuccess(json){
-		console.log(json);
+		// console.log(json);
 		allPlaces = json;
 		render();
 	}
@@ -144,9 +204,9 @@ $(document).ready(function(){
 	function deletePlaceSuccess(json){
 		// allPlaces.splice(allPlaces.indexOf(placeToDelete), 1);
 		var place = json;
-		console.log(json);
+		// console.log(json);
 		var placeId = place._id;
-		console.log('delete place', placeId);
+		// console.log('delete place', placeId);
 		for (var i = 0; i < allPlaces.length; i++){
 			if (allPlaces[i]._id === placeId){
 				allPlaces.splice(i, 1);
