@@ -52,6 +52,25 @@ var new_profile = new Profile({
   }]
 });
 
+var places = [
+  {
+    city: "Rome",
+  country: "Italy",
+  image: "String",
+  favoriteSite: "Pantheon",
+  // haveVisited: true,
+  // futureDestination: false,
+  },
+  {
+    city: "Dublin",
+  country: "Ireland",
+  image: "String",
+  favoriteSite: "Guinness Factory",
+  // haveVisited: true,
+  // futureDestination: true,
+  }
+ ];
+
  // new_profile.save(function(err, newProfile){
  //    if(err) {return console.log(err);}
  //    console.log("saved new profile: ", new_profile);
@@ -144,20 +163,11 @@ app.put('/api/places/:id', function (req, res){
       places.splice(i, 1, i, 1);
     }
   }
-    res.json(updatePlace);
+    //res.json(updatePlace);
+    updatePlace.save(function(err, updatePlace){
+      res.json(updatePlace);
+   }); 
   });
-//   db.Place.findOne({ _id: placeId }, function (err, foundPlace){
-  
-//   // var image = req.body.image;
-//   // var favoriteSite = req.body.favoriteSite;
-  
-//   res.json(foundPlace);
-  
-//   });
-//   updatePlace.save(function(err, savedPlace){
-//        res.json(savedPlace);
-//   }); 
-// });
 
 //delete one place (WORKING):
 app.delete('/api/places/:id', function(req, res){
