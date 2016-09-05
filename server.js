@@ -135,25 +135,29 @@ app.post('/api/places', function(req, res){
 
 //upon clicking 'edit', update that place:
 app.put('/api/places/:id', function (req, res){
-  var placeId = parseInt(req.params.id);
-  db.Place.findOne({ _id: placeId }, function (err, foundPlace){
+  var id = parseInt(req.params.id);
   var city = req.body.city;
-  var country = req.body.country;  
-  var image = req.body.image;
-  var favoriteSite = req.body.favoriteSite;
-  updatePlace = {_id: placeId, city: city, country: country, image: image, favoriteSite: favoriteSite};
-  res.json(foundPlace);
+  var country = req.body.country;
+  var updatePlace = {_id: id, city: city, country: country};
   for (var i=0; i<places.length; i++){
     if (places[i]._id == req.params.id){
-      places.splice(i, 1, i, 1, i, 1, i, 1, i, 1);
+      places.splice(i, 1, i, 1);
     }
   }
     res.json(updatePlace);
   });
-  updatePlace.save(function(err, savedPlace){
-       res.json(savedPlace);
-  }); 
-});
+//   db.Place.findOne({ _id: placeId }, function (err, foundPlace){
+  
+//   // var image = req.body.image;
+//   // var favoriteSite = req.body.favoriteSite;
+  
+//   res.json(foundPlace);
+  
+//   });
+//   updatePlace.save(function(err, savedPlace){
+//        res.json(savedPlace);
+//   }); 
+// });
 
 //delete one place (WORKING):
 app.delete('/api/places/:id', function(req, res){

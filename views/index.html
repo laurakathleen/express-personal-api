@@ -21,7 +21,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
+          <div id="banner">
+          <img id="img-banner" src="/images/worldbanner.jpg">
+          </div>
+          <h1>Laura's Personal API</h1>
           <h4><a href="/api">Read My API Documentation</a></h4>
           <!--PROFILE HANDLEBARS-->
           <div id="profileTarget">
@@ -74,52 +77,66 @@
             <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHLett8djBo62dDXj0EjCimF8Rd6E8cxg&callback=initMap"></script>
 
           <div id="placeTarget">
-            <!-- handlebars template -->
-            <script id="places-template" type="text/x-handlebars-template">
-              {{#each places}}
-              <li class="place-group-item place" data-id="{{_id}}">
-              <hr>
-              <p>
+            <ul class="list-group" id="places-list">    
+              <!-- handlebars template -->
+              <script id="places-template" type="text/x-handlebars-template">
+                {{#each places}}
+                <li class="place-group-item place" data-id="{{_id}}">
+                <hr>
                 <b>{{city}}, {{country}}</b>
-              <br>
-              Favorite Site:
-              {{favoriteSite}}
-              <br>
+                <br>
+                Favorite Site:
+                {{favoriteSite}}
+                <br>
+                  <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
+                      <!-- edit button to toggle update form -->
+                  <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+                  <span><button type="button" class="btn btn-primary editBtn">Edit</button></span></a>
 
-                    <!-- edit button to toggle update form -->
-                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
-                    <span><button type="button" class="btn btn-primary editBtn" data-id={{_id}}>Edit</button></span>                  
-                    </a>
 
-            <!--Form to update the place-->
-            <div class="collapse" id="update-{{_id}}">
-            <br>
-              <form class="update-place">
-                <div class="form-group">
-                <input type="text" name="city" placeholder="City" value="{{city}}">
-                <input type="text" name="country" placeholder="Country" value="{{country}}">
-                <!-- <input type="file" label="Image">
-                <input type="text" name="favorite-site" placeholder="Favorite Site" value="{{favoriteSite}}">
-                <p>Already visited?</p>
-                <input type="radio" name="yes-visited" value="Yes">Yes<br>
-                <input type="radio" name="no-not-visited" value="No">No</br>
-                <p>Planning to go someday?</p>
-                <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
-                <input type="radio" name="not-future-destination" placeholder="No">No<br> -->
+                <!-- form to update todo -->
+                <div class="collapse" id="update-{{_id}}">
+                  <br>
+                  <form class="form-inline update-place">
+                    <div class="form-group">
+                      <input type="text" name="city" class="form-control" placeholder="City" value="{{city}}">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="country" class="form-control" placeholder="Country" value="{{country}}">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-block btn-default" value="Update">
+                    </div>
+                    <div class="form-group">
+                    <input type="text" name="favorite-site" class="form-control" placeholder="Favorite Site" value="{{favoriteSite}}">
+                    </div>
+                    <div class="form-group">
+                    <p>Already visited?</p>
+                    <input type="radio" name="yes-visited" value="Yes">Yes<br>
+                    <input type="radio" name="no-not-visited" value="No">No</br>
+                    </div>
+                    <div class="form-group">
+                    <p>Planning to go someday?</p>
+                    <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
+                    <input type="radio" name="not-future-destination" placeholder="No">No<br>
+                    </div>
+                  </form>
+
+                    
+                    </div>
+                
                 </div>
-                <input type="submit" name="update-place" value="Update place">
-              </form>
-            </div>
-            
-            </a>
-            <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
-            <!-- <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data id={{_id}}>Delete</button> -->
-            </p>
-            </li>
-            {{/each}}
-          </script>
+              </li>
+              {{/each}}
+            </script>
+          </ul>
         </div>
       </div>
     </div>
+    <!-- jquery -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

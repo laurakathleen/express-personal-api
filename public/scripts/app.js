@@ -85,7 +85,9 @@ $(document).ready(function(){
 		var placeToUpdate = allPlaces.find(function(place){
 			return place._id == placeId;
 		 });
+
 		var updatedPlace = $(this).serialize();
+
 		$.ajax({
 			type: 'PUT',
 			url: '/api/places/' + placeId,
@@ -93,10 +95,10 @@ $(document).ready(function(){
 			success: function onUpdateSuccess(json){
 				allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
 				render();
-			// error: onUpdateError
+			error: onUpdateError
 			}
 		});
-	});
+	})
 
 	//delete a place:
 	$placesList.on('click', '.deleteBtn', function(e){
@@ -192,10 +194,9 @@ $(document).ready(function(){
 		console.log('newplace error!');
 	}
 
-	// function onUpdateSuccess(json){
-	// 	allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
-	// 	render();
-	// }
+	function onUpdateError(){
+		console.log('error with update');
+	}
 
 	function onUpdateError(){
 		console.log('error with updating place');
