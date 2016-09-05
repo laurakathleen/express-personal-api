@@ -163,11 +163,16 @@ app.put('/api/places/:id', function (req, res){
       places.splice(i, 1, i, 1);
     }
   }
+  res.json(updatePlace);
     //res.json(updatePlace);
-    updatePlace.save(function(err, updatePlace){
+  updatePlace.save(function(err, updatePlace){
+    if(err){
+      return console.log("save error with update: " + err);
+    } else {
       res.json(updatePlace);
-   }); 
+    }
   });
+});
 
 //delete one place (WORKING):
 app.delete('/api/places/:id', function(req, res){
