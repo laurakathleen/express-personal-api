@@ -62,7 +62,6 @@
             <form id="places-form">
               <input type="text" name="city" placeholder="City" id="city" autofocus>
               <input type="text" name="country" placeholder="Country">
-              <input type="file" label="Image">
               <input type="text" name="favorite-site" placeholder="Favorite Site">
               <p>Already visited?</p>
               <input type="radio" name="radAnswer" value="true">Yes<br>
@@ -72,7 +71,6 @@
               <input type="radio" name="not-future-destination" placeholder="false">No<br>
               <input type="submit" value="Add new place">
             </form>
-          <
 
           <!--GOOGLE MAPS-->
               <div class="container">
@@ -102,16 +100,15 @@
                 <hr>
                 <b>{{city}}, {{country}}</b>
                 <br>
-                Favorite Site:
-                {{favoriteSite}}
+                <p>Favorite Site: </p>
+                <b>{{favoriteSite}}</b>
                 <br>
-                Have you visited? {{haveVisited}}
-                Planning to go in the future? {{futureDestination}}
-                  <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
+                <p>Have you visited?</p></p>{{haveVisited}}</p>
+                <p>Planning to go in the future?</p><p>{{futureDestination}}</p>
+                <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
                       <!-- edit button to toggle update form -->
                   <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
-                  <span><button type="button" class="btn btn-primary editBtn">Edit</button></span></a>
-
+                <span><button type="button" class="btn btn-primary editBtn">Edit</button></span></a>
 
                 <!-- form to update place -->
                 <div class="collapse" id="update-{{_id}}">
@@ -123,9 +120,7 @@
                     <div class="form-group">
                       <input type="text" name="country" class="form-control" id="update-country" placeholder="Country" value="{{country}}">
                     </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-block btn-default" value="Update">
-                    </div>
+                    <br>
                     <div class="form-group">
                     <input type="text" name="favorite-site" class="form-control" placeholder="Favorite Site" value="{{favoriteSite}}">
                     </div>
@@ -138,6 +133,9 @@
                     <p>Planning to go someday?</p>
                     <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
                     <input type="radio" name="not-future-destination" placeholder="No">No<br>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-block btn-default" value="Update">
                     </div>
                   </form>
 

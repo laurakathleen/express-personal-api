@@ -153,7 +153,7 @@ $(document).ready(function(){
 			marker = new google.maps.Marker({
 			position: coords,
 			map: map,
-			title: "Earthquake"
+			title: "Map"
 			});
 
 			}

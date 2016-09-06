@@ -4,10 +4,9 @@ var mongoose = require('mongoose'),
 var PlaceSchema = new Schema({
 	city: String,
 	country: String,
-	image: String,
 	favoriteSite: String,
 	haveVisited: Boolean,
-	futureDestination: Boolean,
+	futureDestination: Boolean
  });
 
 var Place = mongoose.model('Place', PlaceSchema);

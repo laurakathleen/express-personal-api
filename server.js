@@ -52,17 +52,15 @@ var new_profile = new Profile ({
 
 var places = [
   {
-    city: "Rome",
+  city: "Rome",
   country: "Italy",
-  image: "String",
   favoriteSite: "Pantheon",
   haveVisited: true,
   futureDestination: false,
   },
   {
-    city: "Dublin",
+  city: "Dublin",
   country: "Ireland",
-  image: "String",
   favoriteSite: "Guinness Factory",
   haveVisited: true,
   futureDestination: true,
@@ -123,7 +121,6 @@ app.post('/api/places', function(req, res){
   var newPlace = new db.Place({
     city: req.body.city,
     country: req.body.country,
-    image: req.body.image,
     favoriteSite: req.body.favoriteSite,
     haveVisited: req.body.haveVisited,
     futureDestination: req.body.futureDestination
@@ -144,10 +141,10 @@ app.put('/api/places/:id', function (req, res){
   var favoriteSite = req.body.favoriteSite;
   var haveVisited = req.body.haveVisited;
   var futureDestination = req.body.futureDestination;
-  var updatePlace = {_id: id, city: city, country: country};
+  var updatePlace = {_id: id, city: city, country: country, favoriteSite: favoriteSite, haveVisited: haveVisited, futureDestination: futureDestination};
   for (var i=0; i<places.length; i++){
     if (places[i]._id === req.params.id){
-      places.splice(i, 1, i, 1);
+      places.splice(i, 1, i, 1, i, 1, i, 1, i, 1, i, 1);
     }
   }
   res.json(updatePlace);
