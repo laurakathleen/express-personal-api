@@ -19,10 +19,18 @@ h1 {
   text-align: center;
 }
 
+.russell-img {
+  width: 150px;
+  height: auto;
+}
+
+#places-form {
+  display: inline;
+}
 #display-places{
-	background-color: grey;
-	width: 100%;
-	height: auto;
+  background-color: grey;
+  width: 100%;
+  height: auto;
 }
 
 .pull-right a {
@@ -42,14 +50,6 @@ h1 {
   margin-top: 20px;
 }
 
-.pull-right a {
-  color: #000;
-  cursor: pointer;
-  display: inline-block;
-  margin: 3px 5px 0 0;
-  opacity: 0.2;
-}
-.pull-right a:hover {
-  color: #000;
-  opacity: 0.5;
+li {
+  list-style: none;
 }

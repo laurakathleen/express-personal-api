@@ -160,17 +160,17 @@ $(document).ready(function(){
 	
 			console.log(coords);
 
-		var mapSource=$('#earthquake-template').html();
+		var mapSource=$('#map-template').html();
 		 
 
 		//compile:
 		var mapTemplate=Handlebars.compile(mapSource);
 		console.log(mapTemplate);
 
-		var earthquakeHtml = mapTemplate({features: data});
-		console.log(earthquakeHtml);
+		var mapHtml = mapTemplate({features: data});
+		console.log(mapHtml);
 		
-		$("#info").append(earthquakeHtml);
+		$("#info").append(mapHtml);
 	}
 
 

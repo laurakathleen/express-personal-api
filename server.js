@@ -37,19 +37,17 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-var new_profile = new Profile({
+var new_profile = new Profile ({
   name: "Laura Russell",
   githubLink: "https://github.com/laurakathleen",
-  githubProfileImage: String,
   personalSiteLink: "https://laurakathleen.github.io/#home-tab",
-  currentCity: "Burlingame",
-  pets: [{
+  currentCity: "Burlingame, CA",
+  pets: {
     type: "dog",
     name: "Meechum",
     breed: "Australian Shepherd",
     age: 1.5,
-    image: "public/images/Meechum.JPG"
-  }]
+  }
 });
 
 var places = [
@@ -58,16 +56,16 @@ var places = [
   country: "Italy",
   image: "String",
   favoriteSite: "Pantheon",
-  // haveVisited: true,
-  // futureDestination: false,
+  haveVisited: true,
+  futureDestination: false,
   },
   {
     city: "Dublin",
   country: "Ireland",
   image: "String",
   favoriteSite: "Guinness Factory",
-  // haveVisited: true,
-  // futureDestination: true,
+  haveVisited: true,
+  futureDestination: true,
   }
  ];
 
@@ -79,13 +77,13 @@ app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
     documented_my_endpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! I'll go ahead and tell you a little bit about myself!",
+    message: "Welcome to my personal api!",
     documentationUrl: "https://github.com/laurakathleen/express-personal-api", // CHANGE ME
     baseUrl: "https://safe-plains-86136.herokuapp.com/", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "More about me"}, // CHANGE ME
-      {method: "POST", path: "/api/places", description: "Check out the places I've visited"} // CHANGE ME
+      {method: "POST", path: "/api/places", description: "Check out the places I've visited and where I want to go"} // CHANGE ME
     ]
   })
 }); 
@@ -126,7 +124,9 @@ app.post('/api/places', function(req, res){
     city: req.body.city,
     country: req.body.country,
     image: req.body.image,
-    favoriteSite: req.body.favoriteSite/*,*/
+    favoriteSite: req.body.favoriteSite,
+    haveVisited: req.body.haveVisited,
+    futureDestination: req.body.futureDestination
   });
   newPlace.save(function(err, place){
       if (err) {
@@ -141,6 +141,9 @@ app.put('/api/places/:id', function (req, res){
   var id = parseInt(req.params.id);
   var city = req.body.city;
   var country = req.body.country;
+  var favoriteSite = req.body.favoriteSite;
+  var haveVisited = req.body.haveVisited;
+  var futureDestination = req.body.futureDestination;
   var updatePlace = {_id: id, city: city, country: country};
   for (var i=0; i<places.length; i++){
     if (places[i]._id === req.params.id){
