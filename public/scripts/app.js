@@ -27,6 +27,18 @@ $(document).ready(function(){
 	$placesList = $('#placeTarget');
 	$profileSpot = $('#profileTarget');
 
+	function render(){
+		//empty all existing posts from view
+		$placesList.empty();
+
+		//pass allPlaces into the template function
+		var placesHtml = template({ places: allPlaces});
+		// console.log(placesHtml);
+
+		//append html to the view
+		$placesList.append(placesHtml);
+	}
+
 	//compile handlebars:
 	var profileSource = $('#profile-template').html();
 	var profileTemplate = Handlebars.compile(profileSource);
@@ -82,7 +94,7 @@ $(document).ready(function(){
 	$placesList.on('submit', '.update-place', function(e){
 		e.preventDefault();
 		var placeId = $(this).closest('.place').attr('data-id');
-		var placeToUpdate = allPlaces.find(function(place){
+		var placeToUpdate = allPlaces.find(function (place){
 			return place._id == placeId;
 		 });
 
@@ -95,7 +107,7 @@ $(document).ready(function(){
 			success: function onUpdateSuccess(json){
 				allPlaces.splice(allPlaces.indexOf(placeToUpdate), 1, json);
 				render();
-			error: onUpdateError
+				error: onUpdateError
 			}
 		});
 	})
@@ -113,18 +125,6 @@ $(document).ready(function(){
 			error: deletePlaceError
 		});
 	});
-
-	function render(){
-		//empty all existing posts from view
-		$placesList.empty();
-
-		//pass allPlaces into the template function
-		var placesHtml = template({ places: allPlaces});
-		// console.log(placesHtml);
-
-		//append html to the view
-		$placesList.append(placesHtml);
-	}
 
 	function profileRender(){
 		$profileSpot.empty();
