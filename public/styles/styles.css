@@ -1,17 +1,15 @@
-body {
-  color: #333;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: red; /* Sanity Check! */
-}
-
-#banner{
+#header-img{
   width: 100%;
-  height: 20%;
+  height: 400px;
+  background: url(https://static.pexels.com/photos/34020/pexels-photo-large.jpg);
 }
 
-#img-banner{
-margin-left: -290px;
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
 
+#header-info {
+  text-align: center;
 }
 
 h1 {
@@ -27,7 +25,13 @@ h1 {
 
 #places-form {
   display: inline;
+  text-align: center;
 }
+
+#form-header {
+  text-align: center;
+}
+
 #display-places{
   background-color: grey;
   width: 100%;
@@ -49,6 +53,10 @@ h1 {
 #map {
   height: 400px;
   margin-top: 20px;
+}
+
+#places-list {
+  display: inline;
 }
 
 li {

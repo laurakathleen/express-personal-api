@@ -18,12 +18,14 @@
     <script src="/scripts/app.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
+      <!--header img-->
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <div id="banner">
-
-          </div>
+        <div class="col-md-12" id="header-img">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 header-info">
           <h1>Laura's Personal API</h1>
           <h4 id="doc-header"><a href="/api">Read My API Documentation</a></h4>
           <!--PROFILE HANDLEBARS-->
@@ -56,100 +58,97 @@
               </ul>
             </div>
           </div>
-          <hr>
-          <!--END PROFILE HANDLEBARS-->
+        </div>
+      </div>
+      <hr>
+      <!--END PROFILE HANDLEBARS-->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3"
           <div id="form-div">
             <form id="places-form">
+              <h3 id="form-header">Add a new place</h3>
               <input type="text" name="city" placeholder="City" id="city" autofocus>
               <input type="text" name="country" placeholder="Country">
               <input type="text" name="favorite-site" placeholder="Favorite Site">
-              <p>Already visited?</p>
-              <input type="radio" name="radAnswer" value="true">Yes<br>
-              <input type="radio" name="radAnswer" value="false">No</br>
-              <p>Planning to go someday?</p>
-              <input type="radio" name="future-destination" placeholder="true">Yes<br>
-              <input type="radio" name="not-future-destination" placeholder="false">No<br>
-              <input type="submit" value="Add new place">
             </form>
-
-          <!--GOOGLE MAPS-->
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div id="map"></div>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="info">
-
-                      <script id="map-template" type="text/x-handlebars-template">
-                        {{#each features}}
-                        {{/each}}
-                      </script>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHLett8djBo62dDXj0EjCimF8Rd6E8cxg&callback=initMap"></script>
-
-          <div id="placeTarget">
-            <ul class="list-group" id="places-list">    
-              <!-- handlebars template -->
-              <script id="places-template" type="text/x-handlebars-template">
-                {{#each places}}
-                <li class="place-group-item place" data-id="{{_id}}">
-                <hr>
-                <b>{{city}}, {{country}}</b>
-                <br>
-                <p>Favorite Site: </p>
-                <b>{{favoriteSite}}</b>
-                <br>
-                <p>Have you visited?</p></p>{{haveVisited}}</p>
-                <p>Planning to go in the future?</p><p>{{futureDestination}}</p>
-                <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
-                      <!-- edit button to toggle update form -->
-                  <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
-                <span><button type="button" class="btn btn-primary editBtn">Edit</button></span></a>
-
-                <!-- form to update place -->
-                <div class="collapse" id="update-{{_id}}">
-                  <br>
-                  <form class="form-inline update-place">
-                    <div class="form-group">
-                      <input type="text" name="city" class="form-control" id="update-city" placeholder="City" value="{{city}}">
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="country" class="form-control" id="update-country" placeholder="Country" value="{{country}}">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                    <input type="text" name="favorite-site" class="form-control" placeholder="Favorite Site" value="{{favoriteSite}}">
-                    </div>
-                    <div class="form-group">
-                    <p>Already visited?</p>
-                    <input type="radio" name="yes-visited" value="Yes">Yes<br>
-                    <input type="radio" name="no-not-visited" value="No">No</br>
-                    </div>
-                    <div class="form-group">
-                    <p>Planning to go someday?</p>
-                    <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
-                    <input type="radio" name="not-future-destination" placeholder="No">No<br>
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-block btn-default" value="Update">
-                    </div>
-                  </form>
-
-                    
-                    </div>
-                
-                </div>
-              </li>
-              {{/each}}
-            </script>
-          </ul>
+          </div>
         </div>
       </div>
-    </div>
+
+          <!--GOOGLE MAPS-->
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div id="map"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="info">
+
+            <script id="map-template" type="text/x-handlebars-template">
+              {{#each features}}
+              {{/each}}
+            </script>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHLett8djBo62dDXj0EjCimF8Rd6E8cxg&callback=initMap"></script>
+        <div class="row">
+          <div class="col-md-4">
+            <div id="placeTarget">
+              <ul class="list-group" id="places-list">    
+                <!-- handlebars template -->
+                <script id="places-template" type="text/x-handlebars-template">
+                  {{#each places}}
+                  <li class="place-group-item place" data-id="{{_id}}">
+                  <b>{{city}}, {{country}}</b>
+                  <br>
+                  <p>Favorite Site: </p>
+                  <b>{{favoriteSite}}</b>
+                  <br>
+                  <p>Have you visited?</p></p>{{haveVisited}}</p>
+                  <p>Planning to go in the future?</p><p>{{futureDestination}}</p>
+                  <button type="button" class="btn btn-primary deleteBtn" data-id={{_id}}>Delete</button>
+                        <!-- edit button to toggle update form -->
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+                  <span><button type="button" class="btn btn-primary editBtn">Edit</button></span></a>
+
+                  <!-- form to update place -->
+                  <div class="collapse" id="update-{{_id}}">
+                    <br>
+                    <form class="form-inline update-place">
+                      <div class="form-group">
+                        <input type="text" name="city" class="form-control" id="update-city" placeholder="City" value="{{city}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="country" class="form-control" id="update-country" placeholder="Country" value="{{country}}">
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <input type="text" name="favorite-site" class="form-control" placeholder="Favorite Site" value="{{favoriteSite}}">
+                      </div>
+                      <div class="form-group">
+                        <p>Already visited?</p>
+                        <input type="radio" name="yes-visited" value="Yes">Yes<br>
+                        <input type="radio" name="no-not-visited" value="No">No</br>
+                      </div>
+                      <div class="form-group">
+                        <p>Planning to go someday?</p>
+                        <input type="radio" name="future-destination" placeholder="Yes">Yes<br>
+                        <input type="radio" name="not-future-destination" placeholder="No">No<br>
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-default" value="Update">
+                      </div>
+                    </form>
+                  </div>  
+                  </li>
+                  {{/each}}
+                </script>
+            </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+  
     <!-- jquery -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
 

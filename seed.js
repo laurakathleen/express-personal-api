@@ -8,15 +8,11 @@ var new_place = [
     city: "Rome",
 	country: "Italy",
 	favoriteSite: "Pantheon",
-	haveVisited: true,
-	futureDestination: false,
 	},
 	{
     city: "Dublin",
 	country: "Ireland",
 	favoriteSite: "Guinness Factory",
-	haveVisited: true,
-	futureDestination: true,
 	}
  ];
 
